@@ -1,13 +1,13 @@
-// 載入 express 並建構應用程式伺服器
 const express = require('express')
+const handlebars = require('express-handlebars') // 引入 express-handlebars
+const routes = require('./routes')
 const app = express()
-
-// 設定首頁路由
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
+const port = process.env.PORT || 3000
+// 註冊 Handlebars 樣板引擎，並指定副檔名為 .hbs
+app.engine('hbs', handlebars({ extname: '.hbs' }))
+// 設定使用 Handlebars 做為樣板引擎
+app.set('view engine', 'hbs')
+app.use(routes)
 
 // 設定 port 3000
-app.listen(3000, () => {
-  console.log('App is running on http://localhost:3000')
-})
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
