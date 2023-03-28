@@ -7,7 +7,6 @@ if (process.env.NODE_ENV !== 'production') {
 //const routes = require('./routes/')
 
 const app= express() 
-
 app.use(cors()) // using default set CORS header
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
