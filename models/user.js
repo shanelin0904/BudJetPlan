@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     User.associate = function (models) {
         // 和Transaction的關聯
-        User.hasMany(models.Transaction, { foreignKey: 'UserId' })
+        User.hasMany(models.Transaction, { foreignKey: 'userId' })
     }
     return User
 }
