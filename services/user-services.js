@@ -2,8 +2,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const { User } = require('../models')
 const helpers = require('../_helpers')
-const redis = require('redis')
-const redisClient = redis.createClient(process.env.REDIS_URL)
+
 
 const userServices = {
     // 使用者註冊
@@ -75,3 +74,6 @@ const userServices = {
     }
 }
 module.exports = userServices
+
+// 結束 Redis 連線
+//redisClient.quit()

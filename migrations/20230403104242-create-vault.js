@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Transactions', {
+    return queryInterface.createTable('Vaults', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -9,16 +9,25 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
-      date: {
-        type: Sequelize.DATEONLY
+      description: {
+        type: Sequelize.TEXT
       },
-      amount: {
-        type: Sequelize.INTEGER
-      },
-      type: {
-        type: Sequelize.ENUM('income', 'expense')
+      currency: {
+        allowNull: false,
+        type: Sequelize.STRING
+      }, 
+      user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       created_at: {
         allowNull: false,
@@ -31,6 +40,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Transactions');
+    return queryInterface.dropTable('Vaults');
   }
 };
