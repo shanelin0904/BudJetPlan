@@ -2,7 +2,8 @@
 module.exports = (sequelize, DataTypes) => {
     const Transaction = sequelize.define('Transaction', {
         userId: DataTypes.INTEGER,
-        vaultId:DataTypes.INTEGER,
+        vaultId: DataTypes.INTEGER,
+        categoryId: DataTypes.INTEGER,
         name: DataTypes.STRING,
         date: DataTypes.DATEONLY,
         amount: DataTypes.INTEGER,
@@ -16,6 +17,11 @@ module.exports = (sequelize, DataTypes) => {
         // associations can be defined here
         Transaction.belongsTo(models.User, { foreignKey: 'userId' })
         Transaction.belongsTo(models.Vault, { foreignKey: 'vaultId' })
+        Transaction.belongsTo(models.Category, { foreignKey: 'categoryId' })
+        Transaction.belongsToMany(models.Tag, {
+            through: models.Transaction2tag,
+            foreignKey: 'transactionId'
+          })
     };
     return Transaction
 }
