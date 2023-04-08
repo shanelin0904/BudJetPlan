@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         Transaction.belongsTo(models.Vault, { foreignKey: 'vaultId' })
         Transaction.belongsTo(models.Category, { foreignKey: 'categoryId' })
         Transaction.belongsToMany(models.Tag, {
-            through: models.Transaction2tag,
+            through: models.Transaction2Tag,
             foreignKey: 'transactionId'
           })
     };
