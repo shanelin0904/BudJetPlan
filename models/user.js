@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     User.associate = function (models) {
         // 和Transaction的關聯
         User.hasMany(models.Transaction, { foreignKey: 'userId' })
+        User.hasMany(models.Vault, { foreignKey: 'userId' })
+        User.hasMany(models.Category, { foreignKey: 'userId' })
+        User.hasMany(models.Tag, { foreignKey: 'userId' })
     }
     return User
 }

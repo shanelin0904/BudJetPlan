@@ -1,58 +1,34 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Transactions', {
+    return queryInterface.createTable('Categories', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        allowNull: false,
+      title: {
         type: Sequelize.STRING
       },
-      date: {
+      genre_id:  {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.DATEONLY
+        references: {
+          model: 'Genres',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
-      amount: {
-        allowNull: false,
-        type: Sequelize.INTEGER
-      },
-      type: {
-        allowNull: false,
-        type: Sequelize.ENUM('INCOME', 'EXPENSE')
-      }, 
-      currency: {
-        allowNull: false,
-        type: Sequelize.STRING
+      is_default: {
+        type: Sequelize.BOOLEAN
       },
       user_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'Users',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
-      vault_id: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'Vaults',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
-      category_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Categorys',
           key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -69,6 +45,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Transactions');
+    return queryInterface.dropTable('Categories');
   }
 };
