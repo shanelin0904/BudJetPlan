@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       // associations can be defined here
       Tag.belongsTo(models.User, { foreignKey: 'userId' })
       Tag.belongsToMany(models.Transaction, {
-        through: models.Transaction2Tag,
+        through: models.Transaction2tag,
         foreignKey: 'tagId'
       })
     };
